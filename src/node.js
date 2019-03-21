@@ -9,7 +9,7 @@ class Node {
 	}
 
 	appendChild(node) {
-   if(!!this.left){
+   if(this.left){
      this.right=node;
    }
    this.left=node;
