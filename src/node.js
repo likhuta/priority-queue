@@ -66,20 +66,98 @@ class Node {
 	}
 
 	swapWithParent() {
+    /*
+      if(this.parent==null  ){
+
+    }
+    if(this.parent!=null ){
+      //родитель того, с кем хотят поменять местами
+      let totalParent=this.parent.parent;
+
+      // с которым хотят меняться 
+      let currentNodeParent=this.parent;
+
+      // текущий элемент,   предполагаемый родитель
+      let currentNode=this;
+      
+      // left & right  того, с кем хотят поменяться
+      let totalParentLeft=this.parent.left;
+      let totalParentRight=this.parent.right;
+
+      //left & right  того, который меняется
+      let currentNodeLft=this.left;
+      let currentNodeRight=this.right;
+
+      if(currentNodeParent.left!=null && currentNodeParent!=null){
+        if(this==totalParentRight){
+          this.left=totalParentLeft;
+          this.right=currentNodeParent;
+          totalParentLeft.parent=currentNode;
+  
+  
+        }
+        if(this==totalParentLeft){
+          this.left=currentNodeParent;
+          this.right=totalParentRight;
+          totalParentRight.parent=currentNode;
+  
+  
+        }
+  
+
+      }
+
+
+      totalParent=this;
+      currentNodeParent=totalParent;
+      */
 
     if(this.parent==null  ){
 
     }
     if(this.parent!=null ){
-      console.log(this.priority )
-      console.log(this.parent.priority )
+     //родитель того, с кем хотят поменять местами
+     let totalParent=this.parent.parent;
 
-      if(this.priority<this.parent.priority){
-        console.log('eee')
-        let totalParent=this.parent;
-        // вызов чайлд
-   this.parent.parent=this
-      }
+     // с которым хотят меняться 
+     let currentNodeParent=this.parent;
+
+     // текущий элемент,   предполагаемый родитель
+     let currentNode=this;
+     
+     // left & right  того, с кем хотят поменяться
+     let totalParentLeft=this.parent.left;
+     let totalParentRight=this.parent.right;
+
+     //left & right  того, который меняется
+     let currentNodeLft=this.left;
+     let currentNodeRight=this.right;
+
+     if(currentNodeParent.left!=null && currentNodeParent!=null){
+       if(this==totalParentRight){
+         this.left=totalParentLeft;
+         this.right=currentNodeParent;
+         totalParentLeft.parent=currentNode;
+ 
+ 
+       }
+       if(this==totalParentLeft){
+         this.left=currentNodeParent;
+         this.right=totalParentRight;
+         totalParentRight.parent=currentNode;
+ 
+ 
+       }
+ 
+
+     }
+
+      this.parent.parent=this;
+      this.parent=totalParent;
+
+
+
+
 
     }
 		
