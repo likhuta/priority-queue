@@ -9,12 +9,17 @@ class Node {
 	}
 
 	appendChild(node) {
-    console.log({...this})
-  console.log({...node})
 
-    if(this.left!=null && this.right!=null){
-      
+    if(this.left!=null && this.right==null){
+      this.right=node;
+      node.parent=this;
     }
+    if(this.left==null && this.right==null){
+      this.left=node;
+      node.parent=this;
+
+    }
+    /*
     if(this.left!=null && this.right==null){
       if(node.priority>this.left.priority){
         this.right=node;
@@ -33,7 +38,7 @@ class Node {
       node.parent=this;
 
     }
-
+*/
 
 	}
 
@@ -66,58 +71,13 @@ class Node {
 	}
 
 	swapWithParent() {
-    /*
-      if(this.parent==null  ){
-
-    }
-    if(this.parent!=null ){
-      //родитель того, с кем хотят поменять местами
-      let totalParent=this.parent.parent;
-
-      // с которым хотят меняться 
-      let currentNodeParent=this.parent;
-
-      // текущий элемент,   предполагаемый родитель
-      let currentNode=this;
-      
-      // left & right  того, с кем хотят поменяться
-      let totalParentLeft=this.parent.left;
-      let totalParentRight=this.parent.right;
-
-      //left & right  того, который меняется
-      let currentNodeLft=this.left;
-      let currentNodeRight=this.right;
-
-      if(currentNodeParent.left!=null && currentNodeParent!=null){
-        if(this==totalParentRight){
-          this.left=totalParentLeft;
-          this.right=currentNodeParent;
-          totalParentLeft.parent=currentNode;
-  
-  
-        }
-        if(this==totalParentLeft){
-          this.left=currentNodeParent;
-          this.right=totalParentRight;
-          totalParentRight.parent=currentNode;
-  
-  
-        }
-  
-
-      }
-
-
-      totalParent=this;
-      currentNodeParent=totalParent;
-      */
 
     if(this.parent==null  ){
 
     }
     if(this.parent!=null ){
      //родитель того, с кем хотят поменять местами
-     let totalParent=this.parent.parent;
+     let totalParentParent=this.parent.parent;
 
      // с которым хотят меняться 
      let currentNodeParent=this.parent;
@@ -127,48 +87,70 @@ class Node {
      
      // left & right  того, с кем хотят поменяться
      let totalParentLeft=this.parent.left;
-     let totalParentRight=this.parent.right;
+     let totalParentRight=this.parent.right; //=null
 
      //left & right  того, который меняется
      let currentNodeLft=this.left;
      let currentNodeRight=this.right;
 
-     if(currentNodeParent.left!=null && currentNodeParent!=null){
+     if(currentNodeParent.left!=null || currentNodeParent.right!=null){
+
+      if(this==totalParentLeft){
+        console.log('left')
+        this.left=currentNodeParent;
+        this.right=totalParentRight;
+      
+        if(this.parent.parent!=null &&  this.parent.parent.left==currentNodeParent ){
+          this.parent.parent.left=currentNode;
+        }
+        if(this.parent.parent!=null &&  this.parent.parent.right==currentNodeParent ){
+          this.parent.parent.right=currentNode;
+        }
+        if(totalParentRight){
+          totalParentRight.parent=currentNode;
+
+        }
+      }
+
        if(this==totalParentRight){
+        console.log('right')
+
          this.left=totalParentLeft;
          this.right=currentNodeParent;
-         totalParentLeft.parent=currentNode;
- 
- 
-       }
-       if(this==totalParentLeft){
-         this.left=currentNodeParent;
-         this.right=totalParentRight;
-         totalParentRight.parent=currentNode;
- 
- 
-       }
- 
+        if(totalParentLeft){
+          totalParentLeft.parent=currentNode;
 
+        }
+       }
+
+       currentNodeParent.left=currentNodeLft;
+       currentNodeParent.right=currentNodeRight;
      }
-
+     
+   
       this.parent.parent=this;
-      this.parent=totalParent;
-
-
-
-
-
+      this.parent=totalParentParent;
     }
 		
 	}
 }
 
-// const child  = new Node(15, 42);
-// 			const parent  = new Node(42, 15);
+// const root = new Node(15, 42);
+// const left = new Node(42, 15);
+// const right = new Node(13, 42);
+// const childOfLeft = new Node(13, 34);
+// const childOfRight = new Node(0, 1);
 
-// 			parent.appendChild(child);
-// 			child.swapWithParent();
+// root.appendChild(left);
+// root.appendChild(right);
+// left.appendChild(childOfLeft);
+// right.appendChild(childOfRight);
+
+// childOfLeft.swapWithParent();
+// childOfRight.swapWithParent();
+
+//       console.log(root)
+
 
 
 module.exports = Node;
