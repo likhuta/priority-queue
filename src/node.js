@@ -96,7 +96,6 @@ class Node {
      if(currentNodeParent.left!=null || currentNodeParent.right!=null){
 
       if(this==totalParentLeft){
-        console.log('left')
         this.left=currentNodeParent;
         this.right=totalParentRight;
       
@@ -113,8 +112,6 @@ class Node {
       }
 
        if(this==totalParentRight){
-        console.log('right')
-
          this.left=totalParentLeft;
          this.right=currentNodeParent;
         if(totalParentLeft){
