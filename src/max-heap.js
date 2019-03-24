@@ -13,6 +13,13 @@ class MaxHeap {
 	}
 
 	pop() {
+    if (this.root==null){
+
+    }
+    if (this.root!=null){
+
+    }
+
 		
 	}
 
