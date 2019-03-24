@@ -35,6 +35,7 @@ class MaxHeap {
 	}
 
 	restoreRootFromLastInsertedNode(detached) {
+
     let last=this.parentNodes[this.parentNodes.length-1];
     this.root=last;
    
@@ -42,8 +43,22 @@ class MaxHeap {
     this.root.right=detached.right;
     this.root.left.parent=this.root;
     this.root.right.parent=this.root;
-    // this.root.parent=null;
+
+    let arrNewNode=[];
+    arrNewNode.push(last.parent);
+    for( let i=0; i<=this.parentNodes.length-1; i++){
+      if(this.parentNodes[i].priority!=arrNewNode[0].priority &&
+        (this.parentNodes[i].left==null || this.parentNodes[i].right==null )  ){
+        arrNewNode.push(this.parentNodes[i]);
+
+      }
+    }
+
+
+    this.parentNodes=arrNewNode
     last.parent.removeChild(last)
+
+    
 	}
 
 	size() {
