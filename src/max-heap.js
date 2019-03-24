@@ -24,32 +24,26 @@ class MaxHeap {
 	}
 
 	detachRoot() {
-    if(this.root.left==null ){
-      // console.log('here no have child')
-      let copyRoot=this.root;
-      this.root=null;
-      return copyRoot
-    }
-
-    if(this.root.left){
-      // console.log('here  have child')
-
       let arrAfterDetach=this.parentNodes.filter(item=>{
         return item!=this.root;
       })
       this.parentNodes=arrAfterDetach;
-
-      return this.root
-    }
+      let copyRoot=this.root;
+      this.root=null;
+      return copyRoot
      
 	}
 
 	restoreRootFromLastInsertedNode(detached) {
-		let lastInsertNode=this.parentNodes[this.parentNodes.length-1];
-    // console.log(lastInsertNode)
-    this.root.priority=lastInsertNode.priority;
-    this.root.data=lastInsertNode.data;
-    lastInsertNode.parent.removeChild(lastInsertNode)
+    let last=this.parentNodes[this.parentNodes.length-1];
+    this.root=last;
+   
+    this.root.left=detached.left;
+    this.root.right=detached.right;
+    this.root.left.parent=this.root;
+    this.root.right.parent=this.root;
+    // this.root.parent=null;
+    last.parent.removeChild(last)
 	}
 
 	size() {
